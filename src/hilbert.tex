@@ -1,0 +1,133 @@
+% LTeX: language=en
+\section{Hilbert's Basis Theorem}
+\label{sec:hilbert}
+
+Let $\Field$ be a field, and $\Indets$ a finite set of indeterminates. We
+consider the ring of polynomials $\Poly{\Indets}$. We will denote by
+$\Mon{\Indets}$ the set of monomials over $\Field$ and $\Indets$, that are
+products of indeterminates (without leading coefficient). Note that monomials
+are naturally quasi-ordered by divisibility, where $\mon \divleq \mon'$ if
+$\mon$ divides $\mon'$. In this setting, let us recall a consequence of
+Higman's Lemma \cite{HIG52}: the set of monomials $\Mon{\Indets}$ is
+well-quasi-ordered by divisibility.
+
+To a polynomial $p \in \Poly{\Indets}$, we associate the set of maximal
+monomials $\MaxMon(p)$, that is the set of monomials that are maximal for the
+divisibility relation among the monomials of $p$. Remark that $\MaxMon \colon
+\Poly{\Indets} \to \Pfin(\Mon{\Indets})$. Because $\Mon{\Indets}$ is
+well-quasi-ordered by divisibility, the set $\Pfin(\Mon{\Indets})$ is also
+well-quasi-ordered by the Hoare divisibility relation $\hoareDivleq$: $S \hoareDivleq
+S'$ if for all $M \in S$, there exists $M' \in S'$ such that $M \divleq M'$.
+We can use this to endow $\Poly{\Indets}$ with a well-quasi-ordering $\pmonleq$:
+$p \pmonleq p'$ if $\MaxMon(p) \hoareDivleq \MaxMon(p')$.
+
+One of the main remarks of this section is that one recovers a tight
+correspondence between elements of subsets when comparing they upward (resp.
+downward) closures.
+
+\begin{lemma}
+    \label{lem:antichain-bijection}
+    Let $(X,\leq)$ be a quasi-ordered set
+    and let $S, S'$ be two finite subsets of $X$
+    that are antichains for $\leq$,
+    and such that $\upset{S} = \upset{S'}$.
+    Then, there exists a bijection $\sigma \colon S \tobij S'$
+    such that $s \equiv \sigma(s)$ for all $s \in S$.
+
+    The same result holds under the assumption that
+    $\dwset{S} = \dwset{S'}$.
+\end{lemma}
+\begin{proof}
+    Let $x \in S$, by assumption,
+    there exists $y \in S'$
+    such that $x \leq y$. But we also have
+    an $x' \in S$ such that $y \leq x'$.
+    Because $S$ is an antichain, we have $x = x'$,
+    and therefore $x \equiv y$.
+    We can define $\sigma(x) \defined y$.
+    Now, let us prove that $\sigma$ is injective.
+    Assume that $\sigma(x) = \sigma(x')$.
+    Then, $x \equiv \sigma(x) = \sigma(x') \equiv x'$,
+    and because $S$ is an antichain, we have $x = x'$.
+    Let us now prove that $\sigma$ is surjective.
+    This is because $S$ and $S'$ have the same size, that is
+    the number of equivalence classes of minimal elements
+    in $\upset{S} = \upset{S'}$.
+    For the second part of the lemma, we apply
+    the first part to the quasi-ordering $\geq$.
+\end{proof}
+
+
+\begin{lemma}
+   \label{lem:polynomial-division}
+   Let $p, q \in \Poly{\Indets}$ be two non-zero polynomials,
+   such that $p \pmoneq q$.
+    Then, there exists a constant $c \in \Field$ such that
+    $(p - c \times q) \pmonlt q$.
+\end{lemma}
+\begin{proof}
+    Let us first remark that $p \pmoneq q$ if and only if
+     $\MaxMon(p) \hoareDivEq \MaxMon(q)$.
+    Because $\MaxMon(p)$ and $\MaxMon(q)$ are antichains,
+    one can apply \cref{lem:antichain-bijection} to find
+    a bijection $\sigma \colon \MaxMon(p) \tobij \MaxMon(q)$
+    such that $m \equiv \sigma(m)$ for all $m \in \MaxMon(p)$.
+    Now, since the divisibility relation on monomials
+    is antisymmetric (recall that monomials do not 
+    have multiplicative constants coming from $\Field$), we have that $m = \sigma(m)$
+    for all $m \in \MaxMon(p)$. 
+    As a consequence, we can write $p = \sum_{m \in \MaxMon(p)} a_m \times m +
+    r$ and $q = \sum_{m \in \MaxMon(q)} b_m \times m + r'$, where $a_m, b_m \in
+    \Field$ and $R$ and $R'$ are the remaining terms in $p$ and $q$, i.e., are
+    such that $r \pmonlt q$ and $r' \pmonlt q$.
+
+    Now, one can select some $m_0 \in \MaxMon(p)$ (which is possible because
+    $p$ and $q$ are non-zero polynomials), and write
+    $q - c p = \sum_{m \in \MaxMon(q)} (b_m - c \times a_m) m + r' - c \times r$.
+    If we select $c = b_{m_0}/ a_{m_0}$ (which is possible because 
+    the numbers $a_{m_0}$ and $b_{m_0}$ are non-zero), then we have that 
+    $m \notin \MaxMon(q - c \times p)$. However, by construction,
+    every maximal monomial of $q - c \times p$ is in $\MaxMon(q)$.
+    We conclude that $(q - c \times p) \pmonlt q$.
+\end{proof}
+
+\begin{theorem}[Hilbert's Basis Theorem]
+    Let $\seqof{\idl_n}$ be an
+    ascending chain of ideals in $\Poly{\Indets}$.
+    Then, there exists an integer $N$ such that for all $n \geq \Nat$,
+    $\idl_n = \idl_N$.
+\end{theorem}
+\begin{proof}
+    Assume towards a contradiction that there is no such
+    integer $N$, and without loss of generality, that
+    for every $n \in \Nat$, $\idl_n \subsetneq \idl_{n+1}$.
+    We can also assume that $\idl_0 \neq \{0\}$.
+
+    Let us define $H_n \defined \upset[\pmonleq]{\idl_n}$ for all $n \in \Nat$.
+    Because $\idl_n \subsetneq \idl_{n+1}$, it is clear that $H_n \subseteq
+    H_{n+1}$. Because $\Poly{\Indets}$ is well-quasi-ordered by $\pmonleq$,
+    every set $H_n$ can be written as $H_n \defined \upset[\pmonleq]{S_n}$ for
+    some finite set $S_n \subseteq \Poly{\Indets}$ that is an antichain for
+    $\pmonleq$. Let us remark that $0 \notin S_n$ for all $n \in \Nat$, and
+    that $S_n$ in non-empty for all $n \in \Nat$.
+    Without loss of generality, one can further assume that
+    $S_n \subseteq \idl_n$ for all $n \in \Nat$.
+
+    Since, $(\Poly{\Indets}, \pmonleq)$ is well-quasi-ordered,
+    there exists an integer $N$ such that 
+    $H_N = \bigcup_{n \in \Nat} H_n$.
+    In particular, we have $\upset[\pmonleq]{S_N} = \upset[\pmonleq]{S_{N+1}}$.
+    Applying \cref{lem:antichain-bijection}, we find a bijection
+    $\sigma \colon S_N \tobij S_{N+1}$ such that $p \pmoneq \sigma(p)$
+    for all $p \in S_N$.
+    Using the fact that $S_N$ is non-empty and that $0 \notin S_N$,
+    we can find a non-zero polynomial $p \in S_N$,
+    and its corresponding $q \defined \sigma(p) \in S_{N+1}$.
+
+    By \cref{lem:polynomial-division}, we can find a constant $c \in \Field$
+    such that $(p - c \times q) \pmonlt q$. Now, because 
+    $p \in S_N \subseteq \idl_N \subseteq \idl_{N+1}$ 
+    and $q \in S_{N+1} \subseteq \idl_{N+1}$,
+    we have that $(p - c \times q) \in \idl_{N+1}$.
+    This contradicts the minimality of $q$ in $H_{N+1}$.
+\end{proof}

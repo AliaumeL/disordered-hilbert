@@ -1,0 +1,80 @@
+% Little math macros
+\NewDocumentCommand{\set}{ m }{\{ #1 \}}
+\NewDocumentCommand{\setof}{ m m }{\{ #1 \mid #2 \}}
+\NewDocumentCommand{\card}{ m }{\left| #1 \right|}
+\NewDocumentCommand{\seqof}{ m O{n \in \Nat} }{\left( #1 \right)_{#2}}
+
+\NewDocumentCommand{\defined}{ }{\triangleq}
+\newcommand{\defiff}{\overset{\mathrm{def}}{\iff}}
+\newcommand{\defeq}{\overset{\mathrm{def}}{=}}
+
+\newcommand{\subfin}{\subset_{\text{fin}}}
+
+\newcommand{\Pfin}{\mathcal{P}_{\text{fin}}}
+\newcommand{\Pset}{\mathcal{P}}
+
+% functions of all sorts (injective, partial, surjective)
+\newcommand{\topartial}{\rightharpoonup}
+\newcommand{\toinj}{\hookrightarrow}
+\newcommand{\tosurj}{\twoheadrightarrow}
+\newcommand{\tobij}{\stackrel{\simeq}{\longrightarrow}}
+
+% classical sets
+\newcommand{\Nat}{\mathbb{N}}
+
+% Automate the creation of new orderings
+% based on a given symbol.
+% For instance,
+% \NewDocumentOrdering{\pref}{\preceq}{\prec}
+% will create the following commands:
+% \prefleq and \preflt
+% that will respectively expand to
+% \mathrel{\kl[\pref]{\preceq}} and \mathrel{\kl[\pref]{\prec}}
+\NewDocumentCommand{\NewDocumentOrdering}{ m m m }{
+    \expandafter\newcommand\csname #1leq\endcsname{
+        \mathrel{\kl[#1]{#2}}
+    }
+    \expandafter\newcommand\csname #1lt\endcsname{
+        \mathrel{\kl[#1]{#3}}
+    }
+    \knowledge{#1}{notion}
+}
+
+% Order macros
+\NewDocumentCommand{\upset}{ O{} m }{{\uparrow_{#1} #2}}
+\NewDocumentCommand{\dwset}{ O{} m }{{\downarrow_{#1} #2}}
+
+
+% Number theory
+\NewDocumentCommand{\factorial}{ O{} m }{
+    \if\relax\detokenize{#1}\relax
+        #2!
+    \else
+        (#2)!
+    \fi
+}
+
+% orders 
+\NewDocumentOrdering{div}{\sqsubseteq^{\mathrm{div}}}{\sqsubset^{\mathrm{div}}}
+
+\NewDocumentOrdering{pmon}{\preceq}{\prec}
+\NewDocumentCommand{\pmoneq}{}{\mathrel{\kl[pmon]{\simeq}}}
+
+\NewDocumentOrdering{hoareDiv}{\sqsubseteq^{\mathrm{div}}_{\flat}}{\sqsubset^{\mathrm{div}}_{\flat}}
+\NewDocumentCommand{\hoareDivEq}{}{ \mathrel{\kl[\hoareDiv]{\equiv^{\mathrm{div}}_{\flat}}} }
+
+\newcommand{\Field}{\mathbb{K}}
+\newcommand{\Indets}{\mathcal{X}}
+\NewDocumentCommand{\Poly}{ O{\Field} m }{#1[{#2}]}
+\NewDocumentCommand{\Mon}{ O{\Field} m }{\mathsf{Mon}_{#1}({#2})}
+
+\NewDocumentCommand{\mon}{ O{M} }{#1}
+\NewDocumentCommand{\pol}{ O{p} }{#1}
+
+
+\newcommand{\idlGen}[1]{\langle #1\rangle}
+\newcommand{\idl}{\mathcal{I}}
+
+\newcommand{\MaxMon}{\mathsf{MaxMon}}
+
+
