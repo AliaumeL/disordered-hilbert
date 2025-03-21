@@ -1,3 +1,6 @@
+*.kaux
+.DS_Store
+*.diagnose
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
