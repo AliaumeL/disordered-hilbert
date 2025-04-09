@@ -1,3 +1,5 @@
+[![CI](https://github.com/AliaumeL/disordered-hilbert/actions/workflows/ci.yaml/badge.svg)](https://github.com/AliaumeL/disordered-hilbert/actions/workflows/ci.yaml)
+
 # disordered-hilbert
 
 > Removing the need for choosing a total ordering on the variables in the
