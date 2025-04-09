@@ -19,7 +19,7 @@ FIGURES=
 all: $(PAPER).pdf
 
 # Default target: create the pdf file
-%.pdf: %.tex $(FIGURES)
+%.pdf: %.tex $(FIGURES) $(SRC)
 	latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" $<
 
 # How to create standalone versions of the pictures
@@ -29,7 +29,7 @@ fig/%.pdf: fig/%.tex
 	@mv $(notdir $@) $@
 	@rm $(notdir $^)
 
-$(PAPER).tex: $(SRC) $(TEMPLATES) ./paper-meta.yaml
+$(PAPER).tex: $(PAPER).md $(TEMPLATES) ./paper-meta.yaml
 	pandoc --template=templates/plain-article.tex \
 		   --lua-filter=templates/git-meta.lua \
 		   --metadata-file=./paper-meta.yaml \
