@@ -77,4 +77,8 @@
 
 \newcommand{\MaxMon}{\mathsf{MaxMon}}
 
+\NewDocumentCommand{\premulteucl}{ m }{\mathrel{\kl[\premulteucl]{\to_{#1}}}}
+\knowledge{\premulteucl}{notion}
 
+\NewDocumentCommand{\multeucl}{m m}{\mathrel{\kl[\multeucl]{\to_{(#1,#2)}}}}
+\knowledge{\multeucl}{notion}
