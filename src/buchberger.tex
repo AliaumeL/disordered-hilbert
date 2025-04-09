@@ -16,37 +16,65 @@ On more efficient representations, called \kl{Gröbner bases}, the same
 problem is in lintime. In this setting, Buchberger's algorithm is a
 precomputation procedure.
 
-Let us first provide a naïve but incomplete algorithm for membership testing:
-to any set $H$ of polynomials, one can associate a rewriting system
-$\intro*\multeucl{H}$ that is representing \emph{multiviriate Euclidian
-division}. A transition of the form $p \multeucl{H} r$ means that there exists
-a \kl{monomial} $\mon$ and a constant $a$ such that $p = a \mon q + r$ for some
-$q \in H$. It is easy to see that $p \in \idlGen{H}$ if and only if $p
-\multeucl{H}^* 0$. 
-
-However, there is no guarantee that this rewriting system is terminating. One
-solution to ensure termination is to select a well-founded total ordering on
-monomials that is compatible with the multiplicative structure, and restrict
-the rewriting system to the transitions that strictly decrease in this
-ordering. The existence of such an ordering is the easy part of the proof, but
-it creates a problem: it is not clear that the rewriting system is complete. It
-turns out that completeness is equivalent to confluence [todo].
+\AP Let us first provide a naïve but incomplete algorithm for membership
+testing: to any set $H$ of polynomials, one can associate a rewriting system
+$\intro*\premulteucl{H}$ that is representing \emph{multiviriate Euclidian
+division}. A transition of the form $p \premulteucl{H} r$ means that there
+exists a \kl{monomial} $\mon$ and a constant $a$ such that $p = a \mon q + r$
+for some $q \in H$. It is easy to see that $p \in \idlGen{H}$ if and only if $p
+\premulteucl{H}^* 0$. 
 
 \AP
-A \intro{monoidal ordering} is ...
+However, due to the fact that this rewriting system is reversible, it is not
+terminating and does not yield a decision procedure for the $\idlGen{H}$
+membership. One way to ensure termination is to select a \kl{well-founded}
+\kl{total ordering} $\monord$ on monomials that is \kl{compatible with the multiplicative
+structure}, and restrict the rewriting system to the transitions that strictly
+decrease in this ordering. This defines
+a sub-transition system $\multeucl{H}{\monord}$ that is no longer reversible
+by construction, and is furthermore \intro{terminating}: there are no
+infinite sequences of reductions in the system.
 
-\begin{lemma}
-    For any finite set of indeterminates there exists
-    a well-founded monoidal ordering.
-\end{lemma}
+\AP A (pre)order $\leq$ is a \intro{monomial ordering}
+if for all monomials $\mon_1, \mon_2, \mon_3$, such that $\mon_1 \leq \mon_2$,
+$\mon_1 \mon_3 \leq \mon_2 \mon_3$. The existence of \kl{well-founded}
+\kl(order){total} \kl{monomial orderings} follows from a relatively
+straightforward result in order theory: for every $k \in \Nat$, $\Nat^k$ is a
+\kl{well-quasi-order} when endowed with the componentwise ordering.
 
-\begin{lemma}
-    Let $H$ be a finite set of polynomials
-    and $<$ be a well-founded monoidal ordering.
-    The rewriting system $\multeucl{H}$ is confluent
-    if and only if it is complete, i.e. for all
-    $p \in \idlGen{H}$, $p \multeucl{H}^* 0$.
+
+\begin{lemma}[Folklore]
+    \label{lem:monomial-order-exists}
+    For every finite set $\Indets$ of indeterminates,
+    there exists a \kl{well-founded}
+    \kl(order){total} \kl{monomial orderings}. Furthermore,
+    it is computable.
 \end{lemma}
+\begin{proof}
+    Select any total ordering $<$ on the finite set of
+    indeterminates $\Indets$. We define our total ordering
+    as the lexicographic ordering obtained when considering 
+    monomials as sequences of numbers.
+    It is clearly a \kl(order){total}
+    \kl{monomial ordering}.
+    Because of Dickson's Lemma \cite{SCSC12},
+    the set of monomials endowed with the \kl{divisibility preordering}
+    is a \kl{well-quasi-order}.
+    Since our ordering is a linearisation of the 
+    \kl{divisibility preordering} (that is, if
+    $\mon_1 \divleq \mon_2$, then $\mon_1 \leq \mon_2$),
+    it must therefore be \kl{well-founded}
+    \cite{SCSC12}.
+\end{proof}
+
+\AP In order to prove that a given rewrite system $\multeucl{H}{\leq}$ is
+\kl(eucl){complete}, it is interesting to notice the connection between this
+property and a classical notion in rewriting theory, namely \kl{confluence}. A
+rewriting system $\to$ is \intro{confluent} whenever, for all triples $x,y,z$
+such that $x \to y$ and $x \to z$, there exists a $t$ such that $y \to^* t$ and
+$z \to^* t$. Note that, as for the \kl(eucl){completeness}, there is no reason
+for a relation $\multeucl{H}{\leq}$ to be \kl{confluent} (see
+\cref{fig:buchberger-non-confluent}).
 
 \begin{figure}
     \centering
@@ -56,18 +84,170 @@ A \intro{monoidal ordering} is ...
         \node[right=of p] (r2) {$z$};
 
         \path[-stealth]
-            (p) edge node[left]{$\multeucl{H}$} (r1)
-            (p) edge node[midway, above]{$\multeucl{H}$} (r2);
+        (p) edge node[font=\tiny,left]{$(H,\leq)$} (r1)
+        (p) edge node[font=\tiny, midway, above]{$(H,\leq)$} (r2);
     \end{tikzpicture}
     \caption{
         An example of non confluence
         for the rewriting system
-        $\multeucl{H}$, where $H = \set{ xy, xz }$,
+        $\multeucl{H}{\leq}$, where $H = \set{ xy, xz }$,
         for any choice of \kl{monoidal ordering}
-        $<$.
+        $\leq$.
     }
     \label{fig:buchberger-non-confluent}
 \end{figure}
+
+One particularity of the directed rewrite systems is that when a polynomial $p$
+rewrites to zero, not only do we conclude that $p \in \idlGen{H}$, but also
+that $p \in \idlGen{H_{\leq p}}$, where $H_{\leq p}$ is the set of elements in
+$H$ that are less or equal to $p$.
+
+\begin{lemma}
+    \label{lem:confl-impl-complete}
+    Let $H$ be a finite set of polynomials
+    and $\leq$ be a \kl{well-founded} \kl(order){total}
+    \kl{monomial ordering}.
+    If the rewriting system $\multeucl{H}{\leq}$ is \kl{confluent}
+    then it is \kl(eucl){complete}.
+\end{lemma}
+\begin{proof}
+    Assume towards a contradiction that
+    there is a polynomial $p \in \idlGen{H}$
+    that does not rewrite to $0$.
+    Because $\leq$ is a \kl{total} and \kl{well-founded},
+    one can assume $p$ to be minimal for this property.
+
+    Since $p \in \idlGen{H}$,
+    there exists a sequence $\seqof{a_i}[1 \leq i \leq n]$
+    of non-zero coefficients, 
+    a sequence $\seqof{\mon_i}[1 \leq i \leq n]$
+    of monomials,
+    and a sequence 
+    $\seqof{h_i}[1 \leq i \leq n]$ of elements of $H$
+    such that:
+    \begin{equation}
+        p = \sum_{1 \leq i \leq n} a_i \mon_i h_i \quad .
+    \end{equation}
+
+    Let $\mon[K]$ be maximal among the monomials of $p$,
+    and $\mon[L]$ be maximal among the monomials
+    of the polynomials $\mon_i h_i$ for $1 \leq i \leq n$.
+    Without loss of generality, one can also assume that 
+    $\mon[L]$ is minimal among all representations of $p$.
+    There are two cases:
+
+    \begin{description}
+        \item[The two monomials are equal.]
+           In this case, $\mon[K]$ is the maximal monomial of
+           \emph{some} $\mon_i h_i$.
+           Then, let us write $\beta$ for the coefficient of
+           $\mon[K]$ in $p$,
+           and
+           $r \defined p - \beta \mon_i h_i$.
+           It is clear that 
+           $r < p$, and that $p \premulteucl{H} r$,
+           hence that 
+           $p \multeucl{H}{\leq} r$.
+
+           We conclude that $r \in \idlGen{H}$, 
+           and by minimality of $p$, $r \multeucl{H}{\leq}^* 0$.
+           This proves that 
+           $p \multeucl{H}{\leq}^* 0$ 
+           which is absurd.
+
+        \item[The two monomials are not equal.]
+            
+            Let us write $J$ the set of indices $1 \leq j \leq n$
+            such that $\mon[L]$ is the maximal monomial
+            of $\mon_j h_j$. Let us also assume that the
+            (non-zero) coefficient of the monomial $\mon[L]$
+            in $\mon_j h_j$ is $1$ (that can be done by changing
+            the $a_i$'s).
+            Because $\mon[L] \neq \mon[K]$,
+            we conclude that
+            \begin{equation}
+                \sum_{j \in J}
+                a_j = 0 \quad .
+            \end{equation}
+            Because the $a_j$'s are non-zero and
+            $J$ is non-empty, we conclude that $J$ contains at least two 
+            elements. Let us call
+            $J^1$ the set $J$ where one element has been 
+            removed. To avoid nested indices, we call this
+            element $\star$.
+
+            Let us rewrite the polynomial $p$
+            as follows, letting $I = \set{ 1, \dots, n}$:
+            \begin{equation}
+                p = \sum_{j \in J^1} a_j (\mon_j h_j - \mon_\star h_\star)
+                  + 
+                    \sum_{i \in I \setminus J} a_i \mon_i h_i
+                  \quad .
+            \end{equation}
+
+            Now, because the rewriting system is confluent,
+            and because
+            $\mon[L]$
+            can be rewritten into 
+            $\mon[L] - \mon_j h_j$
+            for all $j \in J$,
+            there exists a polynomial $t$ such that
+            $\mon[L] - t = 
+            \mon_j h_j +  r_j$ where $r_j$ is obtained as a combination of elements 
+                    in $H$ having maximal monomials strictly below $\mon[L]$.
+            As a consequence,
+            \begin{equation*}
+                \mon_j h_j - 
+                \mon_\star h_\star
+                =
+                r_\star
+                -
+                r_j
+                \quad .
+            \end{equation*}
+
+            We have obtained a new way to write $p$
+            using elements of $H$ having a strictly
+            smaller maximal monomial. This contradicts
+            the minimality of $\mon[L]$.
+    \end{description}
+\end{proof}
+
+Let us prove the converse direction, i.e. that \kl(eucl){completeness}
+implies \kl{confluence}. This will be crucial in understanding the
+Buchberger algorithm.
+
+\begin{lemma}
+    \label{lem:confl-iff-corr}
+    Let $H$ be a finite set of polynomials and 
+    $\leq$ be a \kl{well-founded}
+    \kl(order){total}
+    \kl{monomial ordering}. Then, the following are equivalent:
+    \begin{enumerate}
+        \item \label{item:complete}
+            The rewriting system $\multeucl{H}{\leq}$ is
+            \kl(eucl){complete}.
+        \item \label{item:confl}
+            The rewriting system $\multeucl{H}{\leq}$ is
+            \kl{confluent}.
+        \item \label{item:wconfl}
+            The rewriting system $\multeucl{H}{\leq}$ is
+            \kl{confluent} when starting from monomials.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    It is clear that \cref{item:confl}
+    implies \cref{item:wconfl}. Furthermore,
+    \cref{lem:confl-impl-complete} actually only used the
+    confluence when starting from monomials,
+    effectively proving \cref{item:wconfl}
+    implies \cref{item:complete}.
+
+\end{proof}
+
+A consequence of \cref{lem:confl-impl-complete} is that the membership problem
+becomes very easy to solve: keep reducing until no more steps can be taken, and
+check if the normal form is $0$.
 
 The classical method to ensure confluence is to 
 understand the \intro{critical pairs} of the rewriting
@@ -83,4 +263,4 @@ orders polynomials according to their set of maximal monomials
 (with the powerset ordering), then one can redo the confluence analysis
 to obtain a complete rewriting system.
 
-
+\subsection{Atomic Buchberger?}

@@ -13,4 +13,5 @@ appendix:
 
 \input{src/intro.tex}
 \input{src/hilbert.tex}
+\input{src/buchberger.tex}
 \input{src/conclusion.tex}
