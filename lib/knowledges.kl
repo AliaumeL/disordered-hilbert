@@ -1,2 +1,47 @@
 % Knowledge file
 
+
+
+\knowledge{notion}
+ | ideal
+
+
+\knowledge{notion}
+ | Gröbner basis
+
+\knowledge{notion}
+ | multiviriate Euclidian division
+ | euclidian rewriting system
+ | rewriting system@eucl
+ | rewrites@eucl
+ | rewrite@eucl
+
+\knowledge{notion}
+ | monomial
+ | monomials
+
+\knowledge{notion}
+ | well-founded
+\knowledge{notion}
+ | well-quasi-ordering
+
+\knowledge{notion}
+ | total ordering
+
+\knowledge{notion}
+ | terminating
+
+\knowledge{notion}
+ | complete@eucl
+ | completeness@eucl
+
+\knowledge{notion}
+ | weakly complete@eucl
+ | weak completeness@eucl
+
+\knowledge{notion}
+ | normal forms
+
+\knowledge{notion}
+ | least common multiple
+

@@ -6,7 +6,7 @@ Let $\Field$ be a field, and $\Indets$ a finite set of indeterminates. We
 consider the ring of polynomials $\Poly{\Indets}$. We will denote by
 $\Mon{\Indets}$ the set of monomials over $\Field$ and $\Indets$, that are
 products of indeterminates (without leading coefficient). Note that monomials
-are naturally quasi-ordered by divisibility, where $\mon \divleq \mon'$ if
+are naturally quasi-ordered by divisibility, where $\mon \intro*\divleq \mon'$ if
 $\mon$ divides $\mon'$. In this setting, let us recall a consequence of
 Higman's Lemma \cite{HIG52}: the set of monomials $\Mon{\Indets}$ is
 well-quasi-ordered by divisibility.
@@ -16,7 +16,7 @@ monomials $\MaxMon(p)$, that is the set of monomials that are maximal for the
 divisibility relation among the monomials of $p$. Remark that $\MaxMon \colon
 \Poly{\Indets} \to \Pfin(\Mon{\Indets})$. Because $\Mon{\Indets}$ is
 well-quasi-ordered by divisibility, the set $\Pfin(\Mon{\Indets})$ is also
-well-quasi-ordered by the Hoare divisibility relation $\hoareDivleq$: $S \hoareDivleq
+well-quasi-ordered by the Hoare divisibility relation $\hoareDivleq$: $S \intro*\hoareDivleq
 S'$ if for all $M \in S$, there exists $M' \in S'$ such that $M \divleq M'$.
 We can use this to endow $\Poly{\Indets}$ with a well-quasi-ordering $\intro*\pmonleq$:
 $p \pmonleq p'$ if $\MaxMon(p) \hoareDivleq \MaxMon(p')$.

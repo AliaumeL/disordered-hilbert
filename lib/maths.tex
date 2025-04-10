@@ -61,14 +61,14 @@
 \NewDocumentCommand{\pmoneq}{}{\mathrel{\kl[pmon]{\simeq}}}
 
 \NewDocumentOrdering{hoareDiv}{\sqsubseteq^{\mathrm{div}}_{\flat}}{\sqsubset^{\mathrm{div}}_{\flat}}
-\NewDocumentCommand{\hoareDivEq}{}{ \mathrel{\kl[\hoareDiv]{\equiv^{\mathrm{div}}_{\flat}}} }
+\NewDocumentCommand{\hoareDivEq}{}{ \mathrel{\kl[hoareDiv]{\equiv^{\mathrm{div}}_{\flat}}} }
 
 \newcommand{\Field}{\mathbb{K}}
 \newcommand{\Indets}{\mathcal{X}}
 \NewDocumentCommand{\Poly}{ O{\Field} m }{#1[{#2}]}
 \NewDocumentCommand{\Mon}{ O{\Field} m }{\mathsf{Mon}_{#1}({#2})}
 
-\NewDocumentCommand{\mon}{ O{M} }{#1}
+\NewDocumentCommand{\mon}{ O{M} }{\mathfrak{#1}}
 \NewDocumentCommand{\pol}{ O{p} }{#1}
 
 
@@ -76,9 +76,18 @@
 \newcommand{\idl}{\mathcal{I}}
 
 \newcommand{\MaxMon}{\mathsf{MaxMon}}
+\newcommand{\MaxMonMult}{\mathsf{MultMaxMon}}
+
+\NewDocumentCommand{\CritPairs}{ m m }{[#1 \mathrel{;} #2]}
 
 \NewDocumentCommand{\premulteucl}{ m }{\mathrel{\kl[\premulteucl]{\to_{#1}}}}
 \knowledge{\premulteucl}{notion}
 
 \NewDocumentCommand{\multeucl}{m m}{\mathrel{\kl[\multeucl]{\to_{(#1,#2)}}}}
 \knowledge{\multeucl}{notion}
+
+
+\NewDocumentCommand{\lcm}{ m m }{\mathsf{lcm}(#1,#2)}
+
+\NewDocumentCommand{\NormalForm}{ O{} m }{ \mathop{\kl[\NormalForm]{\mathsf{NF}_{#1}}}(#2) }
+\knowledge{\NormalForm}{notion}
