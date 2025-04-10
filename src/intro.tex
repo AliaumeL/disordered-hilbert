@@ -1,6 +1,34 @@
 \section{Introduction}
 \label{sec:intro}
 
+\AP Let us fix a finite set of indeterminates $\Indets$, a field $\Field$, and
+let us consider the ring of polynomials $\Poly{\Indets}$. Important subsets of
+a ring in commutative algebra include the \intro{(bilateral) ideals}, which are
+subsets of the ring that are closed under addition and multiplication by any
+element of the ring. Formally, an ideal $\idl$ of a commutative ring $R$ is a
+subset of $R$ such that: for all $p,q \in \idl$ and $r \in R$, $r p + q \in
+\idl$. A fundamental result from commutative algebra is \intro{Hilbert's Basis
+Theorem}, which states that the ring of polynomials $\Poly{\Indets}$ is
+\intro{Noetherian}, that is, every increasing chain of ideals in
+$\Poly{\Indets}$ stabilises (see for instance \cite[Theorem 4]{CLO15}). An
+equivalent formulation of this theorem is that every \kl{ideal} of polynomials
+is \intro{finitely generated}, that is, there exists a finite set of
+polynomials $p_1, \ldots, p_n$ such that $\idl = \idlGen{p_1, \ldots, p_n}$,
+where $\intro*\idlGen{p_1, \ldots, p_n}$ is the smallest ideal containing $p_1,
+\ldots, p_n$.
+
+\AP Because every \kl{ideal} is \kl{finitely generated}, one can try to devise
+algorithms to manipulate ideals of polynomials. One of the simplest algorithmic
+question is to decide the \intro{ideal membership problem}, that is, given a
+polynomial $p$ and an ideal $\idl$, decide whether $p \in \idl$. This problem
+is known to be \EXPSPACE-complete \cite{MAME82}, and most of the algorithms
+that are used in practice start by computing so-called \emph{Gröbner bases}, 
+that represent the same ideal, but on which the ideal membership problem 
+can be more efficiently decided, 
+that represent the same ideal, but on which the ideal membership problem 
+can be more efficiently decided:
+
+
 \begin{itemize}
     \item Hilbert is a fundamental theorem.
     \item adaptations to new settings (infinite number of

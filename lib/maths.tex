@@ -72,7 +72,9 @@
 \NewDocumentCommand{\pol}{ O{p} }{#1}
 
 
-\newcommand{\idlGen}[1]{\langle #1\rangle}
+\newcommand{\idlGen}[1]{\withkl{\kl[\idlGen]}{\mathopen{\cmdkl{\langle}} #1 \mathclose{\cmdkl{\rangle}}}}
+\knowledge{\idlGen}{notion}
+
 \newcommand{\idl}{\mathcal{I}}
 
 \newcommand{\MaxMon}{\mathsf{MaxMon}}
@@ -91,3 +93,6 @@
 
 \NewDocumentCommand{\NormalForm}{ O{} m }{ \mathop{\kl[\NormalForm]{\mathsf{NF}_{#1}}}(#2) }
 \knowledge{\NormalForm}{notion}
+
+
+\newcommand{\EXPSPACE}{\ensuremath{\mathsf{EXPSPACE}}}
