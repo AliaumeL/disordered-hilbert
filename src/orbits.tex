@@ -1,0 +1,39 @@
+% LTeX: language=en
+\section{Orbit Finite Computations}
+\label{sec:orbit-finite-computations}
+
+In this section we will discuss how the theorems obtained in
+\cref{sec:hilbert,sec:buchberger}
+can
+be used in the case where the set of indeterminates is infinite and equipped
+with a group action. Before that, we will need to introduce some notation and
+definitions regarding these so-called \emph{orbit finite} sets.
+
+\AP Let us fix a $\Indets$ of indeterminates and a group $\Grp$ acting on
+$\Indets$. The action of $\Grp$ on $\Indets$ induces an action on the
+polynomial ring $\Poly{\Indets}$, on the sets of monomials $\Mon{\Indets}$, on
+sets of monomials $\Pset(\Mon{\Indets})$, and so on. A function $f \colon X \to Y$ is
+\intro(function){equivariant} if for all $\gelem \in \Grp$ and $x \in X$, we have $f(\gelem \cdot
+x) = \gelem \cdot f(x)$, that is, the function commutes with the action of the group
+on the domain and codomain.
+
+\begin{example}
+  \label{ex:equivariant}
+  Polynomial addition and products are \kl{equivariant} by definition.
+  The function $\MaxMon \colon \Poly{\Indets} \to \Pset(\Mon{\Indets})$
+  is \kl{equivariant} with respect to the action of $\Grp$ on
+  $\Indets$. 
+  Similarly, the function $\MaxMonMult \colon \Pset(\Poly{\Indets}) \to
+  \Pset(\Mon{\Indets})$ is \kl{equivariant}.
+\end{example}
+
+\AP An \intro{equivariant subset} of a set $X$ is a subset $Y \subseteq X$ such
+that $\Grp \cdot Y = Y$, that is, for all $\gelem \in \Grp$ and $y \in Y$, we have
+$\gelem \cdot y \in Y$. We will denote by $\Orbit{\Grp}{X}$ the set of orbits of $X$
+with respect to the action of $\Grp$ on $X$. When the set $\Orbit{\Grp}{X}$ is
+a finite set we say that $X$ is \intro{orbit finite} with respect to the action
+of $\Grp$ on $X$.
+
+
+
+
