@@ -76,9 +76,9 @@ $(PAPER).arxiv.tex: $(SRC) $(TEMPLATES) ./paper-meta.yaml
 $(PAPER).arxiv.tar.gz: $(PAPER).arxiv.tex
 	tar -czf $(PAPER).arxiv.tar.gz \
              $(PAPER).arxiv.tex    \
-			 plainurl.bst          \
-			 ensps-colorscheme.sty \
-             ../LICENSE
+	     plainurl.bst          \
+	     ensps-colorscheme.sty \
+             LICENSE
 
 $(PAPER).arxiv.pdf: $(PAPER).arxiv.tar.gz
 	# create temporary directory
