@@ -25,7 +25,7 @@ easy to see that $p \in \idlGen{H}$ if and only if $p \premulteucl{H}^* 0$.
 
 \AP However, due to the fact that this rewriting system is reversible, it is
 not terminating and does not yield a decision procedure for the $\idlGen{H}$
-membership. One way to ensure termination is to select a \kl{well-founded}
+membership. One way to ensure termination is to select a well-founded
 quasi-ordering $\leq$ on polynomials, and restrict the \kl(eucl){rewriting
 system} to the transitions that strictly decrease in this ordering. This
 defines a sub-transition system $\intro*\multeucl{H}{\leq}$ that is no longer
@@ -34,20 +34,17 @@ no infinite sequences of reductions.
 
 \AP The rewriting system $\multeucl{H}{\leq}$ is no longer
 \intro(eucl){complete}: there might be polynomials $p$ such that $p \in
-\idlGen{H}$ but $p \not\multeucl{H}{\leq}^* 0$. In this abstract
-formulation, and having fixed an ordering $\leq$, a \intro{Gröbner basis} of an
-\kl{ideal} $\idl$ is a finite set $G$ of polynomials such that $G$ generates
-the ideal $\idl$; the rewriting system $\multeucl{G}{\leq}$ is
-\kl(eucl){complete} for the ideal $\idl$.
-
-\AP In practice, the ordering $\leq$ is usually constructed from a
-\kl{well-founded} \kl{total ordering} on the \kl{monomials}, and extended to
+\idlGen{H}$ but $p \not\multeucl{H}{\leq}^* 0$. In this abstract formulation,
+and having fixed an ordering $\leq$, a \intro{Gröbner basis} of an \kl{ideal}
+$\idl$ is a finite set $G$ of polynomials such that $G$ generates the ideal
+$\idl$; the rewriting system $\multeucl{G}{\leq}$ is \kl(eucl){complete} for
+the ideal $\idl$. In practice, the ordering $\leq$ is usually constructed from
+a well-founded total ordering on the \kl{monomials}, and extended to
 polynomials by comparing their leading monomials (for this ordering). This
 total ordering is itself obtained by a choice of an ordering on the
 indeterminates $\Indets$. Because we are precisely interested in the
-``orderless'' setting, we will cannot follow the classical proofs here.
-Instead, we will reuse the quasi-ordering $\pmonleq$ defined in
-\cref{sec:hilbert}.
+``orderless'' setting, we cannot follow the classical proofs here. Instead, we
+will reuse the quasi-ordering $\pmonleq$ defined in \cref{sec:hilbert}.
 
 \AP One particularity of the directed rewrite system is that when a polynomial
 $p$ rewrites to zero, not only do we conclude that $p \in \idlGen{H}$, but also
@@ -65,7 +62,7 @@ elements in $H$ that are less or equal to $p$.
 \begin{proof}
   We prove the result by induction on the length of the
   derivation $p \multeucl{H}{\pmonleq}^* 0$.
-  The base case is trivial, because $0 \in \idlGen{\emptyset}$.
+  The base case is trivial, because $0 \in \idlGen{\set{0}}$.
   For the inductive step, we assume that 
   $p \multeucl{H}{\pmonleq} r$ for some $r$, 
   and that $r \multeucl{H}{\pmonleq}^* 0$.
@@ -294,8 +291,12 @@ restrict it to a finite set without loss of generality.
 \begin{proof}
   To contruct $C$, we consider every pair of monomials $\mon[P], \mon[Q]$ 
   in $\MaxMon(p) \times \MaxMon(q)$,
-  and compute their \kl{least common multiple} 
-  $\lcm{\mon[P]}{\mon[Q]}$. We then 
+  and compute their \intro{least common multiple} 
+  $\lcm{\mon[P]}{\mon[Q]}$,
+  that is the smallest monomial $\mon$ for divisibility such that
+  $\mon[P] \divleq \mon$ and $\mon[Q] \divleq \mon$.
+
+  We then 
   consider $\mon[L] = \frac{\lcm{\mon[P]}{\mon[Q]}}{\mon[P]}$ and
   $\mon[R] = \frac{\lcm{\mon[P]}{\mon[Q]}}{\mon[Q]}$.
   Finally, we let $\beta_p$ the coefficient of $\lcm{\mon[P]}{\mon[Q]}$ in $\mon[L] p$,

@@ -2,34 +2,47 @@
 \section{Hilbert's Basis Theorem}
 \label{sec:hilbert}
 
-Let $\Field$ be a field, and $\Indets$ a finite set of indeterminates. We
+\AP Let $\Field$ be a field, and $\Indets$ a finite set of indeterminates. We
 consider the ring of polynomials $\Poly{\Indets}$. We will denote by
-$\Mon{\Indets}$ the set of monomials over $\Field$ and $\Indets$, that are
-products of indeterminates (without leading coefficient). Note that monomials
-are naturally quasi-ordered by divisibility, where $\mon \intro*\divleq \mon'$ if
-$\mon$ divides $\mon'$. In this setting, let us recall a consequence of
-Higman's Lemma \cite{HIG52}: the set of monomials $\Mon{\Indets}$ is
-well-quasi-ordered by divisibility.
+$\Mon{\Indets}$ the set of \intro{monomials} over $\Field$ and $\Indets$, that are
+products of indeterminates (without leading coefficient). Note that \kl{monomials}
+are naturally quasi-ordered by divisibility, where $\mon \intro*\divleq \mon'$
+if $\mon$ divides $\mon'$.
 
-To a polynomial $p \in \Poly{\Indets}$, we associate the set of maximal
+\AP A quasi-order $(X, \leq)$ is a \intro{well-quasi-order} if every infinite
+sequence $x_0, x_1, \ldots$ of elements of $X$ contains two elements $x_i$ and
+$x_j$ such that $i < j$ and $x_i \leq x_j$. In particular, this means that
+there can be no infinite \intro{antichains} in $X$, that is, no infinite sets
+of pairwise incomparable elements. Let us recall a consequence of Higman's
+Lemma \cite{HIG52}: the set of monomials $\Mon{\Indets}$ is
+\kl{well-quasi-ordered} by divisibility.
+
+\AP To a polynomial $p \in \Poly{\Indets}$, we associate the set of maximal
 monomials $\MaxMon(p)$, that is the set of monomials that are maximal for the
 divisibility relation among the monomials of $p$. Remark that $\MaxMon \colon
 \Poly{\Indets} \to \Pfin(\Mon{\Indets})$. Because $\Mon{\Indets}$ is
-well-quasi-ordered by divisibility, the set $\Pfin(\Mon{\Indets})$ is also
-well-quasi-ordered by the Hoare divisibility relation $\hoareDivleq$: $S \intro*\hoareDivleq
-S'$ if for all $M \in S$, there exists $M' \in S'$ such that $M \divleq M'$.
-We can use this to endow $\Poly{\Indets}$ with a well-quasi-ordering $\intro*\pmonleq$:
-$p \pmonleq p'$ if $\MaxMon(p) \hoareDivleq \MaxMon(p')$.
+\kl{well-quasi-ordered} by divisibility, the set $\Pfin(\Mon{\Indets})$ is also
+well-quasi-ordered by the \reintro[hoareDiv]{Hoare divisibility relation}: $S
+\intro*\hoareDivleq S'$ if for all $M \in S$, there exists $M' \in S'$ such
+that $M \divleq M'$ \cite{SCSC12}. We can use this to endow $\Poly{\Indets}$ with a
+well-quasi-ordering $\intro*\pmonleq$: $p \pmonleq p'$ if $\MaxMon(p)
+\hoareDivleq \MaxMon(p')$.
 
-One of the main remarks of this section is that one recovers a tight
-correspondence between elements of subsets when comparing they upward (resp.
-downward) closures.
+\AP One of the main remarks of this section is that one recovers a tight
+correspondence between elements of subsets when comparing they \kl{upward}
+(resp. \kl{downward}) closures. Let us recall that the
+\intro{downward closure} of a set $S$ in a quasi-ordered set $(X, \leq)$
+is the set $\intro*\dwset[\leq]{S} \defined
+\setof{x \in X}{\exists s \in S, x \leq s}$, and the 
+\intro{upward closure} of a set $S$ in a quasi-ordered set $(X, \leq)$
+is the set $\intro*\upset[\leq]{S} \defined \setof{x \in X}{\exists s \in S, s \leq x}$.
+When the ordering is clear from the context, we will omit the subscript $\leq$.
 
 \begin{lemma}
     \label{lem:antichain-bijection}
     Let $(X,\leq)$ be a quasi-ordered set
     and let $S, S'$ be two finite subsets of $X$
-    that are antichains for $\leq$,
+    that are \kl{antichains} for $\leq$,
     and such that $\upset{S} = \upset{S'}$.
     Then, there exists a bijection $\sigma \colon S \tobij S'$
     such that $s \equiv \sigma(s)$ for all $s \in S$.
@@ -42,13 +55,13 @@ downward) closures.
     there exists $y \in S'$
     such that $x \leq y$. But we also have
     an $x' \in S$ such that $y \leq x'$.
-    Because $S$ is an antichain, we have $x = x'$,
+    Because $S$ is an \kl{antichain}, we have $x = x'$,
     and therefore $x \equiv y$.
     We can define $\sigma(x) \defined y$.
     Now, let us prove that $\sigma$ is injective.
     Assume that $\sigma(x) = \sigma(x')$.
     Then, $x \equiv \sigma(x) = \sigma(x') \equiv x'$,
-    and because $S$ is an antichain, we have $x = x'$.
+  and because $S$ is an \kl{antichain}, we have $x = x'$.
     Let us now prove that $\sigma$ is surjective.
     This is because $S$ and $S'$ have the same size, that is
     the number of equivalence classes of minimal elements

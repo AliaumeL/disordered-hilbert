@@ -1,13 +1,29 @@
 % Knowledge file
 
+\knowledge{notion}
+ | Hilbert's Basis Theorem
+
+
+\knowledge{notion}
+ | finitely generated
 
 
 \knowledge{notion}
  | ideal
+ | ideals
+ | (bilateral) ideals
+
+\knowledge{notion}
+ | ideal membership problem
+ | membership
 
 
 \knowledge{notion}
  | Gröbner basis
+ | Gröbner bases
+\knowledge{notion}
+ | Buchberger
+ | Buchberger's algorithm
 
 \knowledge{notion}
  | multiviriate Euclidian division
@@ -24,9 +40,24 @@
  | well-founded
 \knowledge{notion}
  | well-quasi-ordering
+ | well-quasi-order
+ | well-quasi-ordered
+\knowledge{notion}
+ | antichain
+ | antichains
 
 \knowledge{notion}
  | total ordering
+
+\knowledge{notion}
+ | Noetherian
+
+\knowledge{notion}
+ | upward
+ | upward closure
+\knowledge{notion}
+ | downward
+ | downward closure
 
 \knowledge{notion}
  | terminating

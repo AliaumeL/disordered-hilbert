@@ -1,14 +1,33 @@
 \section{Concluding Remarks}
 \label{sec:conclusion}
 
+\AP The results presented in this paper should be considered as a first step
+towards a better understanding of the structure of ideals in the ring of
+polynomials with an infinite number of indeterminates (up-to a group action).
+However, there are several major roadblocks that remain to be solved. The most
+important one is the fact that in the presence of the group action, one cannot
+use the \kl[hoareDiv]{Hoare divisibility relation} to compare ideals. To understand this
+problem, let us assume that a group $\Grp$ acts on the set of indeterminates
+$\Indets$. We can define the \reintro[gdiv]{divisibility up-to $\Grp$} relation
+$\intro*\gdivleq$ on $\Mon{\Indets}$ as follows: $\mon[M] \gdivleq \mon[M']$ if
+there exists $g \in \Grp$ such that $\mon[M] \divleq g \cdot \mon[M']$. One can
+safely assume that the ordering $\gdivleq$ is a \kl{well-quasi-order} on
+$\Mon{\Indets}$, since otherwise \kl{Hilbert's Basis Theorem} would not hold
+\cite{GHOLAS24}.
 
-We wonder whether some of the results in this paper could be extended to
-infinite sets of variables, such that the monomials are still
-well-quasi-ordered by divisibility. This is a natural question that arises in
-the context of sets with atoms, where the set of variables is infinite but are
-considered up to a group of automorphisms.
+For instance, let us consider the group $\Grp$ of all permutations of the
+indeterminates $\Indets$. In this setting, $x \gdivleq y$ for all
+indeterminates $x$ and $y$ in $\Indets$. Let us now consider the polynomial $p
+= x + y$ and the polynomial $q = x$. We have $\MaxMon(p) = \set{x, y}$ and
+$\MaxMon(q) = \set{x}$, hence $\MaxMon(p) \equiv \MaxMon(q)$ for the Hoare
+ordering on the powersets of monomials. This is extremely problematic: one
+cannot rely on the equivalence of the maximal monomials to safely perform
+substractions and decrease the set of maximal monomials.
 
-\begin{itemize}
-  \item List uses 
-\end{itemize}
-
+The natural ordering on the set of maximal monomials would rather be $S \leq T$
+if there exists a $g \in \Grp$ such that $S \hoareDivleq g \cdot T$, that is,
+we find a uniform $g$ that works for all monomials, and not one $g$ per
+monomial. However, this ordering is never a \kl{well-quasi-order} on the sets
+of monomials: the sequence $\seqof{S_i}[i \in \Nat]$ of the sets $S_i \defined
+\set{ x_0 x_1, \ldots, x_{i-1} x_i, x_i x_0 }$ is an infinite \kl{antichain}
+for this relation, regardless of the group action.

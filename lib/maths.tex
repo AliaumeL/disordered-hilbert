@@ -21,6 +21,8 @@
 
 % classical sets
 \newcommand{\Nat}{\mathbb{N}}
+\newcommand{\Int}{\mathbb{Z}}
+\newcommand{\Rat}{\mathbb{Q}}
 
 % Automate the creation of new orderings
 % based on a given symbol.
@@ -41,8 +43,10 @@
 }
 
 % Order macros
-\NewDocumentCommand{\upset}{ O{} m }{{\uparrow_{#1} #2}}
-\NewDocumentCommand{\dwset}{ O{} m }{{\downarrow_{#1} #2}}
+\NewDocumentCommand{\upset}{ O{} m }{{\mathop{\kl[\upset]{\uparrow_{#1}}} #2}}
+\knowledge{\upset}{notion}
+\NewDocumentCommand{\dwset}{ O{} m }{{\mathop{\kl[\dwset]{\downarrow_{#1}}} #2}}
+\knowledge{\dwset}{notion}
 
 
 % Number theory
@@ -96,3 +100,7 @@
 
 
 \newcommand{\EXPSPACE}{\ensuremath{\mathsf{EXPSPACE}}}
+
+
+\newcommand{\Grp}{\mathcal{G}}
+\NewDocumentOrdering{gdiv}{\sqsubseteq^{\mathrm{div}}_{\Grp}}{\sqsubset^{\mathrm{div}}_{\Grp}}
